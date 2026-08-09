@@ -16,5 +16,4 @@ export class InitialSchema1786224154223 implements MigrationInterface {
         await queryRunner.query(`DROP INDEX \`idx_states_uf\` ON \`states\``);
         await queryRunner.query(`DROP TABLE \`states\``);
     }
-
 }
