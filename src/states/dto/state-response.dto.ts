@@ -1,8 +1,14 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { State } from '../entities/state.entity';
 
 export class StateResponseDto {
+  @ApiProperty({ example: 1 })
   id: number;
+
+  @ApiProperty({ example: 'São Paulo' })
   name: string;
+
+  @ApiProperty({ example: 'SP', minLength: 2, maxLength: 2 })
   uf: string;
 
   private constructor(state: State) {
