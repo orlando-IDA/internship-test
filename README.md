@@ -1,4 +1,4 @@
-# API de Estados e Cidades
+# district-store-API
 
 API REST para cadastro de estados e cidades, construída em NestJS com MySQL.
 
@@ -8,7 +8,13 @@ Todas as exclusões são lógicas (soft delete): o registro permanece no banco c
 
 ## Como executar
 
-Você precisa apenas do **Docker Desktop** rodando. Não é necessário instalar Node nem MySQL.
+Você precisa ter instalado:
+
+- **Docker** (Docker Desktop)
+- **Node 20 ou superior**, com npm
+
+O MySQL não precisa ser instalado ele roda em container.
+
 
 ### Subindo tudo em container
 
@@ -72,8 +78,6 @@ Parar e **apagar o banco inteiro**, para testar uma subida limpa:
 docker compose down -v
 ```
 
-Recomendo rodar esse último antes de qualquer entrega. Se o projeto sobe depois de um `down -v`, ele sobe na máquina de qualquer pessoa.
-
 Acessar o banco direto:
 
 ```bash
@@ -90,7 +94,7 @@ npm run migration:show
 
 Duas opções. Via swagger em `http://localhost:3000/docs` sem instalar nada.
 
-Se preferir, `docs/Insomnia_test_endpoints.yaml` é uma collection do Insomnia com 27 requisições cobrindo os casos de sucesso e de erro, organizadas em pastas. Importe pelo menu do Insomnia o ambiente com a URL base já vem junto, não é necessário configurar nada.
+Se preferir, `docs/Insomnia_test_endpoints.yaml` é uma collection do Insomnia com 27 requisições cobrindo os casos de sucesso e de erro, organizadas em pastas.
 
 ---
 
@@ -143,14 +147,14 @@ src/
 Fora do `src/`:
 
 ```
-database/schema.sql              o schema em SQL puro, comentado — documentação
+docs/schema.sql                  o schema em SQL puro, comentado — documentação
 docs/DER.png                     diagrama entidade-relacionamento
 docs/Insomnia_test_endpoints.yaml    collection de testes
 docker-compose.yml               MySQL 8.4 e a API
 Dockerfile                       build multi-stage da imagem da API
 ```
 
-A organização é **por feature**, não por camada. Cada domínio carrega seu controller, service, entity e DTOs na mesma pasta. Isso é a convenção do NestJS e existe por um motivo: o módulo é a unidade central do framework, e espalhar os arquivos de um mesmo módulo por cinco diretórios quebraria justamente a coesão que o `@Module` deveria expressar.
+A organização é **por feature**, não por camada. Cada domínio carrega seu controller, service, entity e DTOs na mesma pasta. É a convenção do NestJS: o módulo é a unidade central do framework, e espalhar os arquivos de um mesmo módulo por cinco diretórios quebraria a coesão que o `@Module` declara.
 
 Note que não existe uma camada `repository`. No TypeORM, o repositório genérico é injetado direto no service com `@InjectRepository`, e já entrega `find`, `save`, `softDelete` e `restore`. Criar uma interface própria só se justificaria com queries complexas, o que não é o caso aqui.
 
@@ -162,7 +166,7 @@ Note que não existe uma camada `repository`. No TypeORM, o repositório genéri
 
 Porque o NestJS é o framework Node mais próximo do que eu já conhecia. A arquitetura dele é declaradamente inspirada no Angular — módulos, injeção de dependência por construtor e decorators — e essa mesma estrutura se aproxima do Spring Boot, que é onde tenho mais experiência.
 
-Isso reduziu a distância entre "saber o que quero fazer" e "saber como fazer". O mapeamento é quase direto:
+O mapeamento é quase direto:
 
 | Spring Boot | NestJS |
 |---|---|
@@ -190,8 +194,6 @@ O Zod também normaliza a entrada antes de validar: `.trim()` e `.toUpperCase()`
 ### 3. Quais dificuldades encontrou?
 
 **Docker foi de longe a maior.** Nunca tinha configurado um ambiente containerizado do zero. Nos projetos em Spring que fiz até aqui, o banco era um Oracle online — bastava apontar a URL de conexão. Aqui foi necessário entender imagem, container e volume como conceitos distintos.
-
-O detalhe que mais custou foi a inicialização: o MySQL leva cerca de 30 segundos para aceitar conexão na primeira subida, e sem um `healthcheck` a API sobe antes do banco estar pronto e morre na conexão. A combinação de `healthcheck` com `depends_on: condition: service_healthy`.
 
 **A segunda foi a falta de familiaridade com o ecossistema.** Em Spring eu teria terminado esse projeto em uma fração do tempo. Aqui, cada passo exigiu confirmar como a ferramenta esperava ser usada: o TypeORM 1.x removeu a forma de array em `relations` e só aceita objeto; o `nestjs-zod` 5 trocou `patchNestJsSwagger` por `cleanupOpenApiDoc`; o `repository.create()` não toca no banco, apenas instancia — quem persiste é o `save()`.
 
@@ -254,7 +256,7 @@ GET /cidades?uf=SP&name=camp&page=1&limit=20
 
 A resposta vem no formato `{ data, meta }`, onde `meta` traz página, limite, total de registros que casam com o filtro e total de páginas.
 
-A busca por `name` é parcial e **ignora acento e maiúscula**, então `?name=sao` encontra "São Paulo". Isso não vem de tratamento na aplicação: é a collation `utf8mb4_0900_ai_ci` do MySQL, escolhida deliberadamente por atender de graça a um requisito obrigatório.
+A busca por `name` é parcial e **ignora acento e maiúscula**, então `?name=sao` encontra "São Paulo". Isso não vem de tratamento na aplicação: é a collation `utf8mb4_0900_ai_ci` do MySQL, que ignora acento e caixa nas comparações.
 
 Estados não têm paginação, ao contrário de cidades. São 27 registros num domínio fechado, enquanto o Brasil tem cerca de 5.570 municípios. Paginar os dois por simetria adicionaria cerimônia onde não há benefício.
 
@@ -262,7 +264,7 @@ Estados não têm paginação, ao contrário de cidades. São 27 registros num d
 
 ## Modelagem
 
-O diagrama está em `docs/DER.png` e o schema comentado em `database/schema.sql`.
+O diagrama está em `docs/DER.png` e o schema comentado em `docs/schema.sql`.
 
 > O arquivo `schema.sql` é documentação, não é executado. A fonte da verdade do schema são as migrations do TypeORM, que rodam automaticamente no boot e registram o que já foi aplicado na tabela `migrations` — por isso subir a aplicação repetidas vezes não recria nada.
 
