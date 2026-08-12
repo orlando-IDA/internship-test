@@ -1,0 +1,715 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: district-store-api
+meta:
+  id: wrk_360ff8ee47354650b52edcfb0c520043
+  created: 1786373151276
+  modified: 1786373151276
+  description: ""
+collection:
+  - name: Estados
+    meta:
+      id: fld_fc9e756a136b463ab0418e0bf49a1451
+      created: 1786373609152
+      modified: 1786373609152
+      sortKey: -1786373609152
+      description: ""
+    children:
+      - name: Sucesso
+        meta:
+          id: fld_5fc39da5f514492aad9b7d8585574d85
+          created: 1786373632416
+          modified: 1786373632416
+          sortKey: -1786373632416
+          description: ""
+        children:
+          - url: "{{ _.base.base_url }}/estados "
+            name: Criar Estado
+            meta:
+              id: req_41615806a4a04bf880abca11c79c7bae
+              created: 1786373182339
+              modified: 1786457316025
+              isPrivate: false
+              description: ""
+              sortKey: -1786373636654
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{ "name": "São Paulo", "uf": "SP" }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/estados "
+            name: Criar Estado(MG)
+            meta:
+              id: req_22b02a6658b44694ac42a5062b0cfde8
+              created: 1786373803665
+              modified: 1786457319899
+              isPrivate: false
+              description: ""
+              sortKey: -1783186821077
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{ "name": "Minas Gerais", "uf": "mg" }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/estados "
+            name: Listar Estados(findAll)
+            meta:
+              id: req_14f8434c42634b579e79059758da3fad
+              created: 1786373863896
+              modified: 1786457323935
+              isPrivate: false
+              description: ""
+              sortKey: -1781593413288.5
+            method: GET
+            body:
+              mimeType: application/json
+              text: ""
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/estados/sp"
+            name: Listar Estados(findByUf)
+            meta:
+              id: req_64d9a3aa20174787aa3f44826c442e72
+              created: 1786373942206
+              modified: 1786457328358
+              isPrivate: false
+              description: ""
+              sortKey: -1780796709394.25
+            method: GET
+            body:
+              mimeType: application/json
+              text: ""
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/estados/1"
+            name: AtualizarEstado
+            meta:
+              id: req_505700e4f2824e92a08c2b3f02178f36
+              created: 1786373975157
+              modified: 1786457306464
+              isPrivate: false
+              description: ""
+              sortKey: -1786373975157
+            method: PUT
+            body:
+              mimeType: application/json
+              text: '{ "name": "São Paulo", "uf": "SP" }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/estados/2"
+            name: DeletarEstado
+            meta:
+              id: req_d55d23f0943944aebe046f22658009f2
+              created: 1786374195764
+              modified: 1786457310927
+              isPrivate: false
+              description: ""
+              sortKey: -1786373805905.5
+            method: DELETE
+            body:
+              mimeType: application/json
+              text: ""
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Validação
+        meta:
+          id: fld_8f9a5eb2f29749cea2cda3fcd04406f8
+          created: 1786373651798
+          modified: 1786373651798
+          sortKey: -1786373651798
+          description: ""
+        children:
+          - url: "{{ _.base.base_url }}/estados "
+            name: UF duplicado
+            meta:
+              id: req_b5c4468d61b64eee9513ab2546ce873d
+              created: 1786374236471
+              modified: 1786457301937
+              isPrivate: false
+              description: ""
+              sortKey: -1786374236471
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{ "name": "Outro Nome", "uf": "SP" }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/estados "
+            name: "UF acima de 2 digitos "
+            meta:
+              id: req_ec3185d1780546d7b4ec36ee69c154cf
+              created: 1786374291562
+              modified: 1786457297316
+              isPrivate: false
+              description: ""
+              sortKey: -1786374291562
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{ "name": "Teste", "uf": "ABC" }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/estados "
+            name: NomeDuplicado
+            meta:
+              id: req_13c0403e96f04329862ba4b463f15cc9
+              created: 1786374403114
+              modified: 1786457290214
+              isPrivate: false
+              description: ""
+              sortKey: -1786374403114
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{ "name": "São Paulo", "uf": "PS" }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/estados "
+            name: NomeVazio
+            meta:
+              id: req_10e5e9011dda4d97a8746bc1b4d8ffca
+              created: 1786374560526
+              modified: 1786457281415
+              isPrivate: false
+              description: ""
+              sortKey: -1786374560526
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{ "name": "   ", "uf": "SP" }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/estados/mg"
+            name: ListarEstado(null)
+            meta:
+              id: req_4a0f3bdd69c340cda20dd49685f6d9a4
+              created: 1786374669848
+              modified: 1786457285269
+              isPrivate: false
+              description: ""
+              sortKey: -1786374481820
+            method: GET
+            body:
+              mimeType: application/json
+              text: ""
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+  - name: Cidades
+    meta:
+      id: fld_d82e8c0372f64de39a8664b80058cb21
+      created: 1786374779877
+      modified: 1786374779877
+      sortKey: -1786374779877
+      description: ""
+    children:
+      - name: Validação
+        meta:
+          id: fld_de425b7ebaa54b5e8aec3c026184878a
+          created: 1786374789364
+          modified: 1786374789364
+          sortKey: -1786374789364
+          description: ""
+        children:
+          - url: "{{ _.base.base_url }}/cidades"
+            name: NomeDuplicado
+            meta:
+              id: req_76283ea449ad41caa3322232e34fc6e8
+              created: 1786456009339
+              modified: 1786457260051
+              isPrivate: false
+              description: ""
+              sortKey: -1786456009339
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{ "name": "Campinas", "stateId": 3 }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades"
+            name: Estado404
+            meta:
+              id: req_28da0c29839d4151badf880a6e3f046e
+              created: 1786456133077
+              modified: 1786457265558
+              isPrivate: false
+              description: ""
+              sortKey: -1786455901548
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{ "name": "Campinas", "stateId": 999 }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades/999"
+            name: GetById(404)
+            meta:
+              id: req_6a15a685ae4f43628c95e4bae7ced9f1
+              created: 1786456253210
+              modified: 1786457418320
+              isPrivate: false
+              description: ""
+              sortKey: -1786455847652.5
+            method: GET
+            body:
+              mimeType: application/json
+              text: ""
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades?limit=5000"
+            name: Listar(Limit max 100)
+            meta:
+              id: req_31b6bc60e004413da8f2ecdcf4285a26
+              created: 1786456325827
+              modified: 1786457482890
+              isPrivate: false
+              description: ""
+              sortKey: -1786455820704.75
+            method: GET
+            body:
+              mimeType: application/json
+              text: ""
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Sucesso
+        meta:
+          id: fld_10b556840ede4ff9a4cb359d6825cf33
+          created: 1786374796936
+          modified: 1786374796936
+          sortKey: -1786374796936
+          description: ""
+        children:
+          - url: "{{ _.base.base_url }}/estados "
+            name: PostEstado(rodar antes de qualquer)
+            meta:
+              id: req_ff56cf0630b4425e9a509cfacf380518
+              created: 1786377569964
+              modified: 1786457246904
+              isPrivate: false
+              description: ""
+              sortKey: -1786377569964
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{"name":"Minas Gerais","uf":"MG"}'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades"
+            name: CriarCidade
+            meta:
+              id: req_bae44726e4aa4763870b3b4c86efffc8
+              created: 1786377715427
+              modified: 1786457204982
+              isPrivate: false
+              description: ""
+              sortKey: -1786377715427
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{ "name": "Campinas", "stateId": 1 }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades"
+            name: CriarCidade2
+            meta:
+              id: req_4f8a131130594c7798c1d9a5405000c1
+              created: 1786377826825
+              modified: 1786457213244
+              isPrivate: false
+              description: ""
+              sortKey: -1786377642695.5
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{ "name": "Campinas", "stateId": 3 }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades"
+            name: CriarCidade3
+            meta:
+              id: req_6fc42cb952f244649e1cf92b231d3fe8
+              created: 1786377957245
+              modified: 1786457217757
+              isPrivate: false
+              description: ""
+              sortKey: -1786377606329.75
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{ "name": "São Bernardo", "stateId": 1 }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades"
+            name: ListarCidades
+            meta:
+              id: req_dc881dd260d94678900995df3db227d1
+              created: 1786378007895
+              modified: 1786457222324
+              isPrivate: false
+              description: ""
+              sortKey: -1786377588146.875
+            method: GET
+            body:
+              mimeType: application/json
+              text: ""
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades?uf=SP"
+            name: ListarCidades (findByUF)
+            meta:
+              id: req_446878da903f4a1fa5a919a7f962af1f
+              created: 1786378800846
+              modified: 1786457226778
+              isPrivate: false
+              description: ""
+              sortKey: -1786377579055.4375
+            method: GET
+            body:
+              mimeType: application/json
+              text: ""
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades?name=camp"
+            name: ListarCidades (findByName)
+            meta:
+              id: req_b0edd8897ddf41ceb6fe579d3ddbda21
+              created: 1786455592717
+              modified: 1786457231288
+              isPrivate: false
+              description: ""
+              sortKey: -1786377574509.7188
+            method: GET
+            body:
+              mimeType: application/json
+              text: ""
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades?page=1&limit=2"
+            name: ListarCidades (pageable)
+            meta:
+              id: req_3fb52cdb26c34f01ba006855f1941db7
+              created: 1786455659826
+              modified: 1786457237664
+              isPrivate: false
+              description: ""
+              sortKey: -1786377572236.8594
+            method: GET
+            body:
+              mimeType: application/json
+              text: ""
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades/1"
+            name: ListarCidades (findByID)
+            meta:
+              id: req_e16e201c3e014da4a97193cd363c58a0
+              created: 1786455756374
+              modified: 1786457242190
+              isPrivate: false
+              description: ""
+              sortKey: -1786377571100.4297
+            method: GET
+            body:
+              mimeType: application/json
+              text: ""
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades/1"
+            name: AtualizarCidade
+            meta:
+              id: req_a6d360282e9341788cf8b3ed4d4439ae
+              created: 1786455793757
+              modified: 1786458359946
+              isPrivate: false
+              description: ""
+              sortKey: -1786455793757
+            method: PUT
+            body:
+              mimeType: application/json
+              text: '{ "name": "São Bernardo", "stateId": 3 }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades"
+            name: CriarCidade4
+            meta:
+              id: req_c76e0da241394f85b541556d9f0f1f56
+              created: 1786458281688
+              modified: 1786458298578
+              isPrivate: false
+              description: ""
+              sortKey: -1786377597238.3125
+            method: POST
+            body:
+              mimeType: application/json
+              text: '{ "name": "Cidade", "stateId": 1 }'
+            headers:
+              - name: Content-Type
+                value: application/json
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base.base_url }}/cidades/4"
+            name: DeleteCidade4
+            meta:
+              id: req_1950c367c72e4b8c923e8f9571805d60
+              created: 1786458316679
+              modified: 1786458379392
+              isPrivate: false
+              description: ""
+              sortKey: -1786458316679
+            method: DELETE
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_5db12047ab76b5519d9f349f7755160a66072e5b
+    created: 1786373151290
+    modified: 1786373151290
+environments:
+  name: Base Environment
+  meta:
+    id: env_5db12047ab76b5519d9f349f7755160a66072e5b
+    created: 1786373151284
+    modified: 1786457129613
+    isPrivate: false
+  data:
+    base:
+      base_url: http://localhost:3000
